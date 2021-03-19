@@ -1,0 +1,40 @@
+.cryptoList {
+    background-color: #fff;
+    max-width: 1800px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.tableHeader {
+    background-color: #befaf8;
+    padding: 7px 0;
+    font-weight: 500;
+}
+
+.cryptoItem {
+    border-bottom: 1px solid rgba(158, 158, 158, .5);
+
+    &:hover {
+        background-color: rgba(182, 182, 252, 0.2);
+    }
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    & h4 {
+        margin: 0;
+        padding-left: 4px;
+    }
+
+    & p {
+        margin: 4px 0;
+        font-size: 11px;
+    }
+}
