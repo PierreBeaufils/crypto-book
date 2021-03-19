@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import styles from '../styles/layout.module.scss'
 
 type Props = {
   children?: ReactNode
@@ -15,7 +16,7 @@ const Layout = ({ children, title = 'Crypto Book' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <header>
-      <nav>
+      <nav className={styles.navbar}>
         <Link href="/">
           <a>Home</a>
         </Link>{' '}

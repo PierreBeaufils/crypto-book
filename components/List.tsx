@@ -1,9 +1,10 @@
 import * as React from 'react'
+import Image from 'next/image'
 import ListItem from './ListItem'
-import { User } from '../interfaces'
+import { Crypto } from '../interfaces'
 
 type Props = {
-  items: User[]
+  items: Crypto[]
 }
 
 const List = ({ items }: Props) => (
