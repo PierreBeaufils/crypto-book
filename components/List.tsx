@@ -1,7 +1,6 @@
 import * as React from 'react'
 import Image from 'next/image'
 import { useTable, useSortBy, useFilters } from 'react-table';
-import ListItem from './ListItem'
 import { Crypto } from '../interfaces'
 import styles from '../styles/list.module.scss'
 
@@ -13,12 +12,12 @@ const List = ({ data }: Props) => {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Rank',
+        Header: 'RANK',
         accessor: 'rank', // accessor is the "key" in the data
       },
       {
-        Header: 'Name',
-        Cell: ({ row }) => (
+        Header: 'NAME',
+        Cell: ({ row }: any) => (
           <div className={styles.name}>
             <span>
               <Image
@@ -37,20 +36,45 @@ const List = ({ data }: Props) => {
         ),
       },
       {
-        Header: 'Price',
-        accessor: 'price',
+        Header: 'PRICE',
+        Cell: ({ row }: any) => (
+          <span >
+            ${parseFloat(row.original.price).toFixed(2)}
+          </span>
+        ),
       },
       {
-        Header: 'Market Cap',
-        accessor: 'market_cap',
+        Header: '1 DAY CHANGE',
+        Cell: ({ row }: any) => {
+          console.log(row)
+          const parsedValue = row.original["1d"] ? (parseFloat(row.original["1d"].price_change_pct) * 100) : 0
+          return (
+            <span style={{color: parsedValue>0 ? 'green' : 'red'}}>
+              {parsedValue.toFixed(2)}%
+            </span>
+          )
+        },
       },
       {
-        Header: 'Volume (24h)',
-        accessor: '1d.volume',
+        Header: 'MARKET CAP',
+        Cell: ({ row }: any) => {
+          const formattedRow = row.original.market_cap ? new Intl.NumberFormat().format(row.original.market_cap) : 0
+          return formattedRow
+        },
       },
       {
-        Header: 'Circulating Supply',
-        accessor: 'circulating_supply',
+        Header: 'VOLUME (24H)',
+        Cell: ({ row }: any) => {
+          const formattedRow = row.original["1d"] ? new Intl.NumberFormat().format(row.original["1d"].volume) : 0
+          return formattedRow
+        },
+      },
+      {
+        Header: 'CIRCULATING SUPPLY',
+        Cell: ({ row }: any) => {
+          const formattedRow = row.original.circulating_supply ? new Intl.NumberFormat().format(row.original.circulating_supply) : 0
+          return formattedRow
+        },
       },
     ],
     [],
