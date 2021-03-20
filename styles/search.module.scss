@@ -1,0 +1,26 @@
+.search {
+    background-color: #fff;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    & input {
+        padding: 15px;
+        border: none;
+        width: 90%;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    & span {
+        height: 100%;
+        position: absolute;
+        right: 10px;
+        top: 25%;
+    }
+}

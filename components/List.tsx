@@ -2,6 +2,7 @@ import * as React from 'react'
 import Image from 'next/image'
 import { useTable, useSortBy, useFilters } from 'react-table';
 import { Crypto } from '../interfaces'
+import SearchInput from './Search'
 import styles from '../styles/list.module.scss'
 
 type Props = {
@@ -16,7 +17,7 @@ const List = ({ data }: Props) => {
         accessor: 'rank', // accessor is the "key" in the data
       },
       {
-        Header: 'NAME',
+        Header: 'CURRENCY',
         Cell: ({ row }: any) => (
           <div className={styles.name}>
             <span>
@@ -29,11 +30,14 @@ const List = ({ data }: Props) => {
                 />
               </span>
             <div>
-              <h4>{row.original.name}</h4>
-              <p>{row.original.currency}</p>
+              <h4>{row.original.currency}</h4>
             </div>
           </div>
         ),
+      },
+      {
+        Header: 'NAME',
+        accessor: 'name', // accessor is the "key" in the data
       },
       {
         Header: 'PRICE',
@@ -46,7 +50,6 @@ const List = ({ data }: Props) => {
       {
         Header: '1 DAY CHANGE',
         Cell: ({ row }: any) => {
-          console.log(row)
           const parsedValue = row.original["1d"] ? (parseFloat(row.original["1d"].price_change_pct) * 100) : 0
           return (
             <span style={{color: parsedValue>0 ? 'green' : 'red'}}>
@@ -93,42 +96,45 @@ const List = ({ data }: Props) => {
   }, useFilters, useSortBy);
 
   return (
-    <table {...getTableProps()} className={styles.cryptoList}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                  className={styles.tableHeader}
-                >
-                  {column.render('Header')}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr className={styles.cryptoItem} {...row.getRowProps()} >
-                {row.cells.map((cell) => (
-                  <td
-                    {...cell.getCellProps()}
-                    className={styles.cryptoData}
+    <div className={styles.cryptoContainer}>
+      <SearchInput setFilter={setFilter} />
+      <table {...getTableProps()} className={styles.cryptoList}>
+          <thead>
+            {headerGroups.map((headerGroup: any) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column: any) => (
+                  <th
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    className={styles.tableHeader}
                   >
-                    {cell.render('Cell')}
-                  </td>
+                    {column.render('Header')}
+                    <span>
+                      {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                    </span>
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row: any) => {
+              prepareRow(row);
+              return (
+                <tr className={styles.cryptoItem} {...row.getRowProps()} onClick={() => console.log('click')} >
+                  {row.cells.map((cell: any) => (
+                    <td
+                      {...cell.getCellProps()}
+                      className={styles.cryptoData}
+                    >
+                      {cell.render('Cell')}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+    </div>
   )
 }
 
