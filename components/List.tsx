@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useTable, useSortBy, useFilters } from 'react-table';
 import { Crypto } from '../interfaces'
 import SearchInput from './Search'
@@ -19,19 +20,20 @@ const List = ({ data }: Props) => {
       {
         Header: 'CURRENCY',
         Cell: ({ row }: any) => (
-          <div className={styles.name}>
-            <span>
-              <Image
-                src={row.original.logo_url}
-                alt="logo"
-                width={20}
-                height={20}
-                onClick={()=>console.log(row)}
-                />
-              </span>
-            <div>
-              <h4>{row.original.currency}</h4>
-            </div>
+          <div style={{cursor: 'pointer'}}>
+            <Link href={`/currency/${row.original.id.toLowerCase()}`}>
+              <div className={styles.name}>
+                <span>
+                  <Image
+                    src={row.original.logo_url}
+                    alt="logo"
+                    width={20}
+                    height={20}
+                  />
+                </span>
+                <h4>{row.original.currency}</h4>
+              </div>
+            </Link>
           </div>
         ),
       },
@@ -120,7 +122,7 @@ const List = ({ data }: Props) => {
             {rows.map((row: any) => {
               prepareRow(row);
               return (
-                <tr className={styles.cryptoItem} {...row.getRowProps()} onClick={() => console.log('click')} >
+                <tr className={styles.cryptoItem} {...row.getRowProps()}>
                   {row.cells.map((cell: any) => (
                     <td
                       {...cell.getCellProps()}

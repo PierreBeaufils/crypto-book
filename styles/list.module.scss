@@ -17,7 +17,6 @@
 
 .cryptoItem {
     border-bottom: 1px solid rgba(158, 158, 158, .5);
-    cursor: pointer;
 
     &:hover {
         background-color: rgba(182, 182, 252, 0.2);
@@ -25,7 +24,7 @@
 }
 
 .cryptoData {
-    padding: 10px 0;
+    padding: 10px;
 }
 
 .name {
@@ -44,8 +43,7 @@
     }
 }
 
-@media (max-width: 850px) {
-    .cryptoContainer {
-        width: 90%;
-    }
+.currencyItem {
+    margin: 0 auto;
+    width: 400px;
 }

@@ -30,3 +30,8 @@ export type Crypto = {
   "1d": any
   "30d": any
 }
+
+export type User = {
+  name: string
+  id: number
+}

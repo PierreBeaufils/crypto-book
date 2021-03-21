@@ -1,16 +1,11 @@
 import Link from 'next/link'
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Layout from '../components/Layout'
 import List from '../components/List'
 
 const IndexPage = ({data}: any) => (
   <Layout title="Crypto Book">
-    <h1 className="glass">Hello Next.js </h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
+    <h1>Crypto Book</h1>
     <List data={data} />
   </Layout>
 )

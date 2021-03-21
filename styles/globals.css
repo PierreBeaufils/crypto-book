@@ -170,8 +170,8 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Nunito', Segoe UI, Roboto, Oxygen,
         Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background-color: #E6E6E6;
-    width: 100vw;
-    height: 100vh;
+
+    box-sizing: border-box;
 }
 
 a {
@@ -190,4 +190,15 @@ ul {
 
 footer {
     height: 40px;
+}
+
+h1 {
+    font-size: 34px;
+    text-align: center;
+    padding: 27px 0;
+}
+
+h2 {
+    font-size: 27px;
+    text-align: center;
 }
